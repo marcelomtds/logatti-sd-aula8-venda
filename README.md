@@ -7,8 +7,8 @@ Configuração e acesso do RabbitMQ para Windows:
 3 - Iniciar o Rabbit:
   - Executar o arquivo "RabbitMQ Command Prompt (sbin dir)" 
   disponível em C:\Users\SEU_NOME_DE_USUARIO\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\RabbitMQ Server
-  ou procurar por "sbin" na cortana do windowns
-  - Executar no console que foi aberto o comando "rabbitmq-plugins.bat enable rabbitmq_management"
+  ou procurar por "sbin" na cortana do windows
+  - Executar o comando "rabbitmq-plugins.bat enable rabbitmq_management" que foi no console que foi aberto
 
 4 - Para acessar o RabbitMQ Management: http://localhost:15672
   Usuário: guest
