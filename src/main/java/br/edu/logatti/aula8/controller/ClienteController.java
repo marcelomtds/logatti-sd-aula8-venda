@@ -18,8 +18,9 @@ public class ClienteController {
     private ClienteService service;
 
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody final Cliente cliente) {
-        return ResponseEntity.ok().body(service.save(cliente));
+    public ResponseEntity save(@RequestBody final Cliente cliente) {
+        service.sendRabbit(cliente);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping

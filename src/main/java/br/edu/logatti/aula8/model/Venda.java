@@ -12,18 +12,18 @@ public class Venda implements Serializable {
     private static final long serialVersionUID = -5656398723290810962L;
 
     @Id
-    private String _id;
+    private String id;
     private String descricao;
     private LocalDate data;
     private Produto produto;
     private Cliente cliente;
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescricao() {

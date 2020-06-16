@@ -2,6 +2,7 @@ package br.edu.logatti.aula8.service;
 
 import br.edu.logatti.aula8.exception.ResourceNotFoundException;
 import br.edu.logatti.aula8.model.Cliente;
+import br.edu.logatti.aula8.rabbit.producer.ClienteProducer;
 import br.edu.logatti.aula8.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,13 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private ClienteProducer clienteProducer;
+
+    public void sendRabbit(final Cliente cliente) {
+        clienteProducer.send(cliente);
+    }
 
     public Cliente save(final Cliente cliente) {
         return repository.save(cliente);

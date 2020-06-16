@@ -19,8 +19,9 @@ public class VendaController {
     private VendaService service;
 
     @PostMapping
-    public ResponseEntity<Venda> save(@RequestBody final VendaRequest request) {
-        return ResponseEntity.ok().body(service.save(request));
+    public ResponseEntity save(@RequestBody final VendaRequest request) {
+        service.sendRabbit(request);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping

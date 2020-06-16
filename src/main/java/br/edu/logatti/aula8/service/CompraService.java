@@ -3,6 +3,7 @@ package br.edu.logatti.aula8.service;
 import br.edu.logatti.aula8.exception.ResourceNotFoundException;
 import br.edu.logatti.aula8.model.Compra;
 import br.edu.logatti.aula8.model.request.CompraRequest;
+import br.edu.logatti.aula8.rabbit.producer.CompraProducer;
 import br.edu.logatti.aula8.repository.CompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,20 @@ public class CompraService {
 
     @Autowired
     private ProdutoService produtoService;
+
     @Autowired
     private FornecedorService fornecedorService;
 
+    @Autowired
+    private CompraProducer compraProducer;
+
+    public void sendRabbit(final CompraRequest compraRequest) {
+        compraProducer.send(compraRequest);
+    }
+
     public Compra save(final CompraRequest request) {
         Compra compra = new Compra();
-        compra.set_id(request.get_id());
+        compra.setId(request.getId());
         compra.setDescricao(request.getDescricao());
         compra.setProduto(produtoService.findById(request.getProdutoId()).get());
         compra.setFornecedor(fornecedorService.findById(request.getFornecedorId()).get());
@@ -36,7 +45,6 @@ public class CompraService {
 
     public Optional<Compra> findById(final String id) {
         return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Compra.class.getSimpleName())));
-
     }
 
     public void delete(final String id) {

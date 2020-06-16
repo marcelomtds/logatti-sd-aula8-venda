@@ -18,8 +18,9 @@ public class ProdutoController {
     private ProdutoService service;
 
     @PostMapping
-    public ResponseEntity<Produto> save(@RequestBody final Produto produto) {
-        return ResponseEntity.ok().body(service.save(produto));
+    public ResponseEntity save(@RequestBody final Produto produto) {
+        service.sendRabbit(produto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
@@ -35,7 +36,7 @@ public class ProdutoController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") final String id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(path = "/{id}")

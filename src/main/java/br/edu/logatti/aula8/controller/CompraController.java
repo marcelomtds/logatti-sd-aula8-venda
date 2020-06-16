@@ -19,8 +19,9 @@ public class CompraController {
     private CompraService service;
 
     @PostMapping
-    public ResponseEntity<Compra> save(@RequestBody final CompraRequest request) {
-        return ResponseEntity.ok().body(service.save(request));
+    public ResponseEntity save(@RequestBody final CompraRequest compraRequest) {
+        service.sendRabbit(compraRequest);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
